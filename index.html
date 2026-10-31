@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      The web document template. app.json builds with `web.output: "single"`,
+      and in that mode Expo IGNORES app/+html.tsx (it is only used for
+      static/server rendering) and falls back to its bare default template —
+      which silently dropped everything below: no `viewport-fit=cover` (so in
+      landscape Chrome kept the page out of the display cutout and the player
+      sat shoved to one side), no dvh sizing, no manifest, theme colour, fonts
+      or title. Keep this file and app/+html.tsx in sync.
+    -->
+    <meta charset="utf-8" />
+    <title>Zero Media</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="icon-512.png" />
+    <style id="expo-reset">
+      html,
+      body {
+        width: 100%;
+        /* HEIGHT, not just min-height, must be the DYNAMIC viewport. Chrome on
+           Android sizes 100% / 100vh as if the URL bar were hidden — normally
+           harmless, because scrolling the document hides the bar. This app
+           never scrolls the document (body overflow:hidden; it scrolls inside
+           its own ScrollViews), so the bar never hides and the root sat one
+           URL-bar height below the visible area: the bottom ~56px of every
+           page (the details page's Reviews row) was clipped and unreachable.
+           100dvh tracks the bar; 100% stays first as the old-browser fallback. */
+        height: 100%;
+        height: 100dvh;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+        background-color: #000;
+      }
+      /* react-native-web ScrollView reset: the app scrolls inside its own
+         ScrollViews, not the document. */
+      body {
+        overflow: hidden;
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+      }
+      /* RN Web's atomic classes set font-family per element, beating the body
+         rule — override on the elements it renders Text/View as. */
+      div, span, p, h1, h2, h3, h4, h5, h6, button, input, textarea, select, label {
+        font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif !important;
+      }
+    </style>
+  <link rel="icon" href="favicon.ico" /></head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  <script type="module" src="_expo/static/js/web/entry-ccfce1620f167339cfb79560e822472a.js" defer></script>
+</body>
+</html>

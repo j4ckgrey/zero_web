@@ -1,0 +1,6 @@
+// Runtime config injected by docker-entrypoint.sh from environment variables.
+// Operators set ANFI_SERVER_URL in docker-compose; the entrypoint substitutes
+// it here at container startup before nginx serves the file.
+window.__ANFI_CONFIG__ = {
+  serverUrl: "${ANFI_SERVER_URL}"
+};
